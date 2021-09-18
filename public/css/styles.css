@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.nav-brand {
+    font-size: 2.5rem;
+    color: blue;
+    font-family: 'Sacramento', cursive;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.hero-img {
+    margin: auto;
+    width: 25%;
+}
+
+.popular-posts{
+    padding: 5rem;
+}
+
+.sub-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: underline 3px wavy grey;
+}
