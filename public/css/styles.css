@@ -11,7 +11,11 @@ body {
     font-family: 'Sacramento', cursive;
 }
 
-.title {
+.navbar-burger {
+    height: 4rem;
+}
+
+.title-heading {
     font-size: 4rem;
     font-weight: 700;
     text-align: center;
@@ -22,8 +26,18 @@ body {
     width: 25%;
 }
 
-.popular-posts{
-    padding: 5rem;
+.popular-post-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.popular-post {
+    background-color: #f8f8f8;
+    padding: 2rem;
+}
+
+.popular-post-heading{
+    font-weight: 800;
 }
 
 .sub-title {
@@ -31,4 +45,56 @@ body {
     font-weight: 700;
     text-align: center;
     text-decoration: underline 3px wavy grey;
+}
+
+.post-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 5rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
+.popular-post-img {
+    width: 40%;
+    border-radius: 2rem;
+}
+
+.posts-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.blog-posts-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 2rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 2rem;
+    max-width: 300px;
+}
+
+.blog-posts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.blog-posts-img {
+    border-radius: 2rem;
+}
+
+.footer{
+    padding: 2rem;
+}
+
+.github-link:hover{
+    text-decoration: underline;
 }
