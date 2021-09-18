@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+<main class="blog-container">
+    <img class="blog-img blog-img-container" src="<%= post.img %> " alt="">
+    <article class="blog-content">
+        <h1 class="title">
+            <%= post.title %>
+        </h1>
+        <p>
+            <%= post.content %>
+        </p>
+    </article>
+</main>
+<%- include("partials/footer") %>

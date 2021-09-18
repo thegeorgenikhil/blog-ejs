@@ -20,7 +20,9 @@ body {
     font-weight: 700;
     text-align: center;
 }
-
+.hero{
+    margin: 2rem 0;
+}
 .hero-img {
     margin: auto;
     width: 25%;
@@ -28,7 +30,6 @@ body {
 
 .popular-post-container {
     padding-top: 5rem;
-    padding-bottom: 5rem;
 }
 
 .popular-post {
@@ -51,7 +52,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem 5rem;
+    margin: 2rem 3rem;
     background-color: white;
     padding: 2rem;
     border-radius: 2rem;
@@ -63,8 +64,8 @@ body {
 }
 
 .posts-container {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
 }
 
 .blog-posts-container {
@@ -88,7 +89,14 @@ body {
 }
 
 .blog-posts-img {
-    border-radius: 2rem;
+    border-radius: 1rem;
+    max-height: 200px;
+}
+
+.blog-posts-img-container{
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
 }
 
 .footer{
@@ -97,4 +105,37 @@ body {
 
 .github-link:hover{
     text-decoration: underline;
+}
+
+.blog-container{
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-img-container{
+    align-self: center;
+}
+
+.blog-img{
+    width: 80%;
+    margin: auto;
+    border-radius: 1rem;
+    align-self: center;
+}
+
+.blog-content{
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem 0;
+}
+
+.compose-form{
+    padding: 5rem 10rem;
+}
+
+.upload-input{
+    width: 30%;
 }
