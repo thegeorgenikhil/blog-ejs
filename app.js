@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.set("view engine", "ejs")
 
-mongoose.connect("mongodb://localhost:27017/blogDB")
+mongoose.connect("mongodb+srv://admin-nikhil:Nikhil5787@cluster0.efyjl.mongodb.net/blogDB")
 
 const postSchema = new mongoose.Schema({
     img: String,
@@ -30,58 +30,6 @@ const postSchema = new mongoose.Schema({
 })
 
 const Post = mongoose.model("Post", postSchema)
-
-// const posts = [{
-//         img: "https://picsum.photos/id/1025/600/400",
-//         title: "Introduction To MongoDB",
-//         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//         popularPost: true
-//     },
-//     {
-//         img: "https://picsum.photos/id/1025/600/400",
-//         title: "Semantic HTML",
-//         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//         popularPost: false
-//     }, {
-//         img: "https://picsum.photos/id/1025/600/400",
-//         title: "Intro to CSS",
-//         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//         popularPost: false
-//     }, {
-//         img: "https://picsum.photos/id/1025/600/400",
-//         title: "Data Structures and Algorithms",
-//         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//         popularPost: false
-//     },
-//     {
-//         img: "https://picsum.photos/id/1025/600/400",
-//         title: "Computer Science Fundamentals",
-//         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//         popularPost: false
-//     }, {
-//         img: "https://picsum.photos/id/1025/600/400",
-//         title: "Intro to React Native",
-//         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//         popularPost: false
-//     }
-// ];
-
-const post1 = new Post({
-    img: "https://picsum.photos/id/1025/600/400",
-    title: "Intro to React Native",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    popularPost: true
-})
-
-const post2 = new Post({
-    img: "https://picsum.photos/id/1025/600/400",
-    title: "Computer Science Fundamentals",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    popularPost: false
-})
-
-// post1.save()
-// post2.save()
 
 app.get("/", (req, res) => {
     Post.find({}, (err, posts) => {
@@ -143,7 +91,7 @@ app.post('/compose', (req, res) => {
     uploadPath = __dirname + "/public/upload/" + sampleFileName;
 
 
-    sampleFile.mv(uploadPath, function (err) {
+    sampleFile.mv(uploadPath, async function (err) {
         if (err)
             return res.status(500).send(err);
         const post = new Post({
@@ -152,7 +100,7 @@ app.post('/compose', (req, res) => {
             content: postContent,
             popularPost: false
         });
-        post.save()
+        await post.save()
         res.redirect("/")
 
 
@@ -163,13 +111,13 @@ app.post("/popular", (req, res) => {
     let selectedPost = req.body.select;
     Post.find({}, (err, posts) => {
         if (!err) {
-            posts.forEach(post => {
+            posts.forEach(async (post) => {
                 if (_.lowerCase(post.title) === _.lowerCase(selectedPost)) {
-                    Post.findOneAndUpdate({_id: post._id}, {popularPost: true}, (err,docs) =>{
+                    await Post.findOneAndUpdate({_id: post._id}, {popularPost: true}, (err,docs) =>{
                         return
                     })
                 }else{
-                    Post.findOneAndUpdate({_id: post._id}, {popularPost: false}, (err,docs) =>{
+                    await Post.findOneAndUpdate({_id: post._id}, {popularPost: false}, (err,docs) =>{
                         return
                     })
                 }
