@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+<main class="popular-post-form">
+    <h1 class="title">Change Popular Post:</h1>
+    <form action="/popular" method="post" >
+        <div class="select">
+            <select name="select">
+                <option>Select dropdown</option>
+                <% posts.forEach(post => { %>
+                <option value="<%= post.title %> "><%= post.title %> </option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="control">
+            <button class="button is-success popular-btn" type="submit">Submit</button>
+        </div>
+    </form>
+</main>
+<%- include("partials/footer") %>

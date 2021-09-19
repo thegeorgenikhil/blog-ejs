@@ -2,6 +2,8 @@ const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload');
+const _ = require("lodash")
+const mongoose = require("mongoose")
 
 
 const app = express();
@@ -72,7 +74,18 @@ app.get("/compose", (req, res) => {
     res.render("compose")
 })
 
-app.post('/compose', function (req, res) {
+app.get("/about",(req,res)=>{
+    res.render("about")
+})
+
+app.get("/popular", (req,res) =>{
+    res.render("popular",{
+        posts:posts
+    })
+})
+
+
+app.post('/compose', (req, res) => {
     let sampleFile;
     let uploadPath;
 
@@ -98,6 +111,18 @@ app.post('/compose', function (req, res) {
 
     });
 });
+
+app.post("/popular",(req,res) =>{
+    const selectedPost = req.body.select;
+    posts.forEach(post => {
+        if (_.lowerCase(post.title) === _.lowerCase(selectedPost)) {
+            post.popularPost = true
+        }else{
+            post.popularPost = false
+        }
+    })
+    res.redirect("/")
+})
 
 app.listen(3000, () => {
     console.log("Server started at port 3000")
