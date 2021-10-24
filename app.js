@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.set("view engine", "ejs")
 
-mongoose.connect("mongodb+srv://admin-nikhil:Nikhil5787@cluster0.efyjl.mongodb.net/blogDB")
+mongoose.connect("")
 
 const postSchema = new mongoose.Schema({
     img: String,
